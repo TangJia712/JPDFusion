@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use JPDFusion, please cite the software and the associated paper."
+title: "JPDFusion: Gaussian-copula spatiotemporal fusion of HLS with SAR or MCD43A4"
+type: software
+version: 1.0.0
+date-released: 2026-08-31
+license: MIT
+authors:
+  - family-names: "Tang"
+    given-names: "Jia"
+repository-code: "https://github.com/TangJia712/JPDFusion"
+keywords:
+  - remote sensing
+  - data fusion
+  - Gaussian copula
+  - HLS
+  - SAR
+  - MCD43A4
+

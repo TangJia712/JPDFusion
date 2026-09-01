@@ -1,0 +1,61 @@
+# Put this repository at E:/Paper/STF/JPDFusion and keep project_root=".".
+# Alternatively set an absolute root, e.g. E:/Paper/STF/JPDFusion.
+project_root: .
+
+paths:
+  hls: Data/HLS
+  sar: Data/SAR
+  mcd43a4: Data/MCD43A4
+  outputs: Outputs
+
+# Run either source independently or both in one command.
+sources: [SAR, MCD43A4]
+
+raster:
+  hls_scale: 0.0001
+  hls_valid_range_raw: [0, 10000]
+  output_nodata: -20000.0
+  compression: deflate
+  block_size: 256
+
+preprocessing:
+  enabled: true
+  write_linear: true
+  write_linear_sg: true
+  sg_window_length: 7
+  sg_polyorder: 2
+  preserve_observations: true
+  edge_fill: nearest
+
+clustering:
+  n_clusters: 15
+  half_window: 2             # temporal stack length = 2*half_window+1
+  sample_size: 200000
+  batch_size: 4096
+  max_iter: 100
+  random_state: 42
+  sar_feature_bands: [1, 2, 3]                 # VV, VH, RVI
+  mcd43a4_feature_bands: [1, 2, 3, 4, 5, 6]  # edit if sample has fewer bands
+  input_product: Linear_SG
+
+copula:
+  pixel_sample_per_cluster: 3000
+  texture_window: 5
+  h_init: 2
+  h_max: 7
+  min_samples: 80
+  max_samples_per_cluster: 120000
+  shrinkage_alpha: 0.05
+  quantiles: [0.05, 0.50, 0.95]
+  tile_height: 500
+  tile_width: 500
+  random_state: 42
+  sar_bands: [1, 2, 3]       # VV, VH, RVI
+  mcd43a4_red_band: 3
+  mcd43a4_nir_band: 4
+
+residual:
+  background_median_window: 3
+  smooth_window: 5
+  preserve_observed_hls: true
+  clip_reflectance: [0.0, 1.0]

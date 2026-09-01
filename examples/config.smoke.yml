@@ -1,0 +1,33 @@
+project_root: ./smoke_data
+paths:
+  hls: Data/HLS
+  sar: Data/SAR
+  mcd43a4: Data/MCD43A4
+  outputs: Outputs
+sources: [SAR, MCD43A4]
+raster:
+  block_size: 16
+preprocessing:
+  sg_window_length: 7
+  sg_polyorder: 2
+clustering:
+  n_clusters: 3
+  half_window: 1
+  sample_size: 500
+  batch_size: 128
+  max_iter: 30
+  sar_feature_bands: [1, 2, 3]
+  mcd43a4_feature_bands: [1, 2, 3, 4, 5, 6]
+copula:
+  pixel_sample_per_cluster: 200
+  texture_window: 3
+  h_init: 1
+  h_max: 2
+  min_samples: 30
+  max_samples_per_cluster: 2000
+  tile_height: 16
+  tile_width: 16
+residual:
+  background_median_window: 3
+  smooth_window: 3
+
